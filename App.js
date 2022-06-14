@@ -2,11 +2,13 @@ import { StyleSheet, Text, View, Image, TouchableWithoutFeedback, TouchableOpaci
 import { useDimensions, useDeviceOrientation } from '@react-native-community/hooks';
 import WelcomeScreen from './app/screens/WelcomeScreen';
 import ViewImageScreen from './app/screens/ViewImageScreen';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
 
 export default function App() {
  
   return (
 <ViewImageScreen/>
+
   );
 }
 
