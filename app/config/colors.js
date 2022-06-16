@@ -1,4 +1,9 @@
+import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
+
 export default {
-	primary: "#fc5c65",
-	secondary: "#4ecdc4"
+	primary:"#023c40",
+	secondary: "#EF314C",
+	ormany: "#FCE0B2",
+	wording: "#023c40"
 }
+
