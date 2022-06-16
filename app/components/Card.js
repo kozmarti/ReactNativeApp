@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 		marginBottom: 7
 	},
 	subTitle: {
-		color: colors.primary
+		color: colors.danger
 	}
 })
 export default Card;
