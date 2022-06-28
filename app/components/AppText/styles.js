@@ -4,8 +4,6 @@ const styles = StyleSheet.create({
 	text: {
 		color: colors.wording,
 		fontSize: 20,
-		letterSpacing: -1,
-		fontWeight: "bold",
 		...Platform.select({
 			ios: {
 				fontFamily: "Avenir",
