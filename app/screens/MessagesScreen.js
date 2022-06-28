@@ -11,8 +11,8 @@ import ListItemDeleteAction from '../components/ListItemDeleteAction';
 const initialMessages = [
 	{
 	id: 1,
-	title: 'T1',
-	description: 'D1',
+	title: 'En informatique, un fichier texte ou fichier texte brut ou fichier texte simple est un fichier dont le contenu représente uniquement une suite de caractères ',
+	description: 'D1En informatique, un fichier texte ou fichier texte brut ou fichier texte simple est un fichier dont le contenu représente uniquement une suite de caractères',
 image: require('../assets/background.jpg')	
 },
 {
