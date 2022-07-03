@@ -32,6 +32,7 @@ source={require('../assets/background4.jpg')}>
 const styles = StyleSheet.create({
 	title:{
 		paddingTop: 30,
+		fontWeight: "bold"
 	},
 	background: {
 		flex: 1,

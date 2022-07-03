@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, View, Image, TouchableWithoutFeedback, TouchableOpacity, Alert, TouchableHighlight, ImageBackground, SafeAreaView, Button, Platform, StatusBar, Dimensions} from 'react-native';
 import { useDimensions, useDeviceOrientation } from '@react-native-community/hooks';
 import WelcomeScreen from './app/screens/WelcomeScreen';
@@ -14,8 +14,25 @@ import ListingsScreen from './app/screens/ListingsScreen';
 import { TextInput } from 'react-native';
 import AppTextInput from './app/components/AppTextInput';
 import AppPicker from './app/components/AppPicker';
+import ImageInput from './app/components/ImageInput';
 import ListingEditScreen from './app/screens/ListingEditScreen';
+import * as ImagePicker from "expo-image-picker";
+import * as Camera from 'expo-camera';
+import ImageInputList from './app/components/ImageInputList';
 
 export default function App() {
- return <ListingEditScreen/>
+	const [imageUris, setImageUris ] = useState([]);
+	const handleAdd = uri => {
+		setImageUris([...imageUris, uri])
+	}
+	const handleRemove = uri => {
+		setImageUris(imageUris.filter(imageUri => imageUri !==uri))
+	}
+ return<Screen>
+	<ImageInputList
+	imageUris={imageUris}
+	onAddImage={handleAdd}
+	onRemoveImage={handleRemove}
+	/>
+ </Screen>;
 }

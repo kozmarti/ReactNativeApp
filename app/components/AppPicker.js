@@ -8,12 +8,13 @@ import AppText from './AppText';
 import { TouchableWithoutFeedback } from 'react-native';
 import { Modal } from 'react-native';
 import PickerItem from './PickerItem';
-function AppPicker({icon, items, onSelectItem, placeholder, selectedItem}) {
+
+function AppPicker({icon, items, numberOfColumns=1, onSelectItem, placeholder, selectedItem, PickerItemComponent = PickerItem, width="100%"}) {
 	const [modalVisible, setModalVisible] = useState(false);
 	return (
 		<>
 		<TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
-<View style={styles.container}>
+<View style={[styles.container, {width}]}>
 {icon && <MaterialCommunityIcons name={icon} size={25} color={colors.danger} style={styles.icon}/>}
 
 {selectedItem ? (
@@ -29,10 +30,22 @@ function AppPicker({icon, items, onSelectItem, placeholder, selectedItem}) {
 <Modal visible={modalVisible} animationType="slide">
 
 	<Button title="Close" onPress={() => setModalVisible(false)}/>
+
 	<FlatList
 	data={items}
 	keyExtractor={item => item.value.toString()}
-	renderItem={({item}) => <PickerItem label={item.label} onPress={()=> {setModalVisible(false); onSelectItem(item)}}/> }
+	numColumns={numberOfColumns}
+	renderItem={({item}) => (
+	<PickerItemComponent
+	item={item}
+	label={item.label} 
+	onPress={()=> {
+		setModalVisible(false); 
+		onSelectItem(item);
+	}}
+	/> 
+	)}
+
 	/>
 </Modal>
 </>
@@ -43,7 +56,6 @@ const styles = StyleSheet.create({
 		backgroundColor: colors.ormany,
 		borderRadius: 25,
 		flexDirection: "row",
-		width: "100%",
 		padding: 15,
 		marginVertical: 10
 	},
