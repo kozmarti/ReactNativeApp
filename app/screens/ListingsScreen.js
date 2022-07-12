@@ -16,7 +16,7 @@ const listings = [
 	image: require("../assets/background2.jpg")
 }
 ] 
-function ListingsScreen(props) {
+function ListingsScreen({navigation}) {
 	return (
 <Screen style={styles.screen}>
 
@@ -28,6 +28,7 @@ function ListingsScreen(props) {
 	title={item.title}
 	subTitle={"$" +item.price}
 	image={item.image}
+	onPress={() => navigation.navigate("ListingDetails", item)}
 	/>
 	} />
 </Screen>
