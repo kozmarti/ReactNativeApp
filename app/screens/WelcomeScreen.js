@@ -3,7 +3,7 @@ import { ImageBackground, StyleSheet, View, Image, Text, Platform, Anmated } fro
 import AppButton from '../components/AppButton';
 import AppText from '../components/AppText/AppText';
 import colors from '../config/colors';
-
+import routes from '../navigation/routes';
 function WelcomeScreen({ navigation }) {
 
 	
@@ -21,10 +21,10 @@ source={require('../assets/background4.jpg')}>
 
 	</View>
 	<View style={styles.buttonContainer}>
-<AppButton title="Login" onPress={() => navigation.navigate("Login")}></AppButton>
+<AppButton title="Login" onPress={() => navigation.navigate(routes.LOGIN)}></AppButton>
 	</View>
 	<View style={styles.buttonContainer}>
-<AppButton title="Register" color="secondary" onPress={() => navigation.navigate("Register")}></AppButton>
+<AppButton title="Register" color="secondary" onPress={() => navigation.navigate(routes.REGISTER)}></AppButton>
 	</View>
 </ImageBackground>
 	);
