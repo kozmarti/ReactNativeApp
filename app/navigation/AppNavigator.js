@@ -8,7 +8,7 @@ import {MaterialCommunityIcons} from '@expo/vector-icons';
 import NewListingButton from "./NewListingButton";
 import routes from "./routes";
 const Tab = createBottomTabNavigator();
-
+// screenoption error here
 const AppNavigator = () => (
 	<Tab.Navigator screenOptions={{ headerShown: false }}>
 		<Tab.Screen name="Feed" component={FeedNavigator} options={{tabBarIcon: ({color, size})=> <MaterialCommunityIcons name="home" color={color} size={size} />}}/>
