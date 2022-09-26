@@ -18,14 +18,16 @@ function ListingsScreen({navigation}) {
 	
 	
 	return (
+		<>
+		<ActivityIndicator visible={getListingsApi.loading}/>
 <Screen style={styles.screen}>
 		{getListingsApi.error && 
 		<View style={styles.errorContainer}>
 		<AppText style={styles.errorMessage}>Couldn't retrieve the listings.</AppText>
-		<AppButton title="Retry" onPress={loadListings} color={"secondary"}/>
+		<AppButton title="Retry" onPress={getListingsApi.request} color={"secondary"}/>
 		</View>
 		}
-		<ActivityIndicator visible={getListingsApi.loading}/>
+		
 		<FlatList
 	data={getListingsApi.data}
 	keyExtractor={listing => listing.id.toString()}
@@ -35,10 +37,12 @@ function ListingsScreen({navigation}) {
 	subTitle={"$" +item.price}
 	imageUrl={item.images[0].url}
 	onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
+	thumbnailUrl={item.images[0].thumbnailUrl}
 	/>
 	} />
 	
 </Screen>
+</>
 	);
 }
 

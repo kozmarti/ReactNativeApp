@@ -1,24 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {StyleSheet, Image} from 'react-native';
 import * as Yup from 'yup';
 
 import Screen from '../components/Screen';
-import {AppForm, SubmitButton, AppFormField} from '../components/forms'; 
+import {AppForm, SubmitButton, AppFormField, ErrorMessage} from '../components/forms'; 
+import useAuth from '../auth/useAuth';
+import authApi from '../api/auth';
+import usersApi from '../api/users';
+import useApi from "../hooks/useApi";
+import ActivityIndicator from '../components/ActivityIndicator';
+
+const validationSchema = Yup.object().shape({
+	name: Yup.string().required().label("Name"),
+	email: Yup.string().required().email().label("Email"),
+	password: Yup.string().required().min(4).label("Password")
+})
 
 function RegisterScreen(props) {
-	const validationSchema = Yup.object().shape({
-		name: Yup.string().required().email().label("Name"),
-		email: Yup.string().required().email().label("Email"),
-		password: Yup.string().required().min(4).label("Password")
-	})
-	return (
-		<Screen style={styles.container}>
+	const registerApi = useApi(usersApi.register);
+	const loginApi = useApi(authApi.login)
+  	const auth = useAuth();
+  	const [error, setError] = useState();
 
+  	const handleSubmit = async (userInfo) => {
+    	const result = await registerApi.request(userInfo);
+
+    	if (!result.ok) {
+      	if (result.data) setError(result.data.error);
+      	else {
+        setError("An unexpected error occurred.");
+        
+      	}
+      	return;
+    	}
+
+    	const { data: authToken } = await loginApi.request(
+      		userInfo.email,
+      		userInfo.password
+    	);
+    	auth.login(authToken);
+  };
+	
+	return (<>
+		<ActivityIndicator visible={registerApi.loading || loginApi.loading}/>
+		<Screen style={styles.container}>
+			<Image 
+			style={styles.logo}
+			source={require("../assets/logo.png")}/>
 			<AppForm
 			initialValues={{name: '', email: '', password: ''}}
-			onSubmit={values => console.log(values)}
+			onSubmit={handleSubmit}
 			validationSchema={validationSchema}
 			>
+				<ErrorMessage error={error} visible={error} />
 				<AppFormField
 						autoCapitalze="none"
 						autoCorrect={false}
@@ -44,12 +78,14 @@ function RegisterScreen(props) {
 						secureTextEntry={true}
 						/>
 						<SubmitButton 
+						color="secondary"
 						title="Register" 
 						/> 
 					
 			</AppForm>
 
 		</Screen>
+		</>
 	);
 }
 

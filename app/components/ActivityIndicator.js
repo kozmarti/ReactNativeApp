@@ -1,10 +1,31 @@
-import React from 'react';
-import LottieView from 'lottie-react-native';
+import React from "react";
+import LottieView from "lottie-react-native";
+import { View, StyleSheet } from "react-native";
+import colors from "../config/colors";
 
+function ActivityIndicator({ visible = false }) {
+  if (!visible) return null;
 
-function ActivityIndicator({visible=false}) {
-	if (!visible) return null;
-	return <LottieView loop source={require("../assets/animation/loader.json")}/>
-};
+  return (
+    <View style={styles.overlay}>
+      <LottieView
+        autoPlay
+        loop
+        source={require("../assets/animation/loader.json")}
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  overlay: {
+    position: "absolute",
+    backgroundColor: colors.ormany,
+    height: "100%",
+    opacity: 0.8,
+    width: "100%",
+    zIndex: 1,
+  },
+});
 
 export default ActivityIndicator;

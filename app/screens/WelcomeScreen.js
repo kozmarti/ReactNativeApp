@@ -4,6 +4,7 @@ import AppButton from '../components/AppButton';
 import AppText from '../components/AppText/AppText';
 import colors from '../config/colors';
 import routes from '../navigation/routes';
+
 function WelcomeScreen({ navigation }) {
 
 	
