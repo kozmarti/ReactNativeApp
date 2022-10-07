@@ -29,6 +29,20 @@
     "web": {
       "favicon": "./app/assets/favicon.png"
     },
-    "description": "A marketplace for selling stuff we do not need anymore"
+    "description": "A marketplace for selling stuff we do not need anymore",
+    "notification": {
+      "iosDisplayInForeground": true
+    },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./local/path/to/myNotificationIcon.png",
+          "color": "#ffffff",
+          "sounds": ["./local/path/to/mySound.wav", "./local/path/to/myOtherSound.wav"],
+          "mode": "production"
+        }
+      ]
+    ]
   }
 }

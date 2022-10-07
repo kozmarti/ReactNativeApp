@@ -8,6 +8,10 @@ import {ErrorMessage, AppForm, SubmitButton, AppFormField} from '../components/f
 import authApi from '../api/auth';
 import useAuth from '../auth/useAuth';
 
+const validationSchema = Yup.object().shape({
+	email: Yup.string().required().email().label("Email"),
+	password: Yup.string().required().min(4).label("Password")
+})
 
 function LoginScreen(props) {
 	const auth = useAuth();
@@ -19,10 +23,7 @@ function LoginScreen(props) {
 		auth.login(result.data);
 		
 	} 
-	const validationSchema = Yup.object().shape({
-		email: Yup.string().required().email().label("Email"),
-		password: Yup.string().required().min(4).label("Password")
-	})
+	
 	return (
 		
 		<Screen style={styles.container}>

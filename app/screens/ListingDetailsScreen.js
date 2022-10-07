@@ -1,35 +1,44 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import AppText from '../components/AppText';
 import Card from '../components/Card';
 import colors from '../config/colors';
 import ListItem from '../components/ListItem';
 import { Image } from 'react-native-expo-image-cache';
+import ContactSellerForm from '../components/ContactSellerForm';
+import ListItemSeparator from '../components/ListItemSeparator';
 
 function ListingDetailsScreen({route}) {
 	const listing = route.params;
 	return (
+		<KeyboardAvoidingView behavior='position' keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 100}>
 		<View style={styles.card}>
 			<Image style={styles.image} tint="light" preview={{ uri: listing.images[0].thumbnailUrl}} uri={listing.images[0].url}></Image>
 			<View style={styles.detailsContainer}>
 				<AppText style={styles.title}>{listing.title}</AppText>
 				<AppText style={styles.subTitle}>${listing.price}</AppText>
 				<View style={styles.userContainer}>
+					<ListItemSeparator/>
 				<ListItem
 				image={require('../assets/student.jpg')}
 				title="Maria"
 				subTitle="5 listings"
 				/>
+				
 				</View>
 			</View>
+			<View style={styles.message}>
+			<ContactSellerForm listing={listing} />
+			</View>
 		</View>
+		</KeyboardAvoidingView>
 	);
 }
 
 const styles = StyleSheet.create({
 	card: {
 		backgroundColor: "white",
-		marginBottom: 20,
+		marginBottom: 30,
 		overflow: "hidden",
 	},
 	image: {
@@ -37,16 +46,22 @@ const styles = StyleSheet.create({
 		width: "100%",
 	},
 	detailsContainer: {
-		padding: 20
+		
 	},
 	title: {
-		marginBottom: 7
+		marginBottom: 7,
+		paddingLeft: 20,
+		paddingTop: 10
 	},
 	subTitle: {
-		color: colors.primary
+		color: colors.primary,
+		paddingLeft: 20
 	},
 	userContainer: {
-		marginVertical: 40
+		marginTop: 40
+	},
+	message: {
+		padding: 10
 	}
 })
 
