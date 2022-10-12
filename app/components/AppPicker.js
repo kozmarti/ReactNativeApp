@@ -32,6 +32,7 @@ function AppPicker({icon, items, numberOfColumns=1, onSelectItem, placeholder, s
 	<Button title="Close" onPress={() => setModalVisible(false)}/>
 
 	<FlatList
+	style={styles.modalcontainer}
 	data={items}
 	keyExtractor={item => item.value.toString()}
 	numColumns={numberOfColumns}
@@ -68,6 +69,9 @@ const styles = StyleSheet.create({
 	placeholder: {
 		color: colors.danger,
 		flex: 1
+	},
+	modalcontainer: {
+		backgroundColor: colors.ormany
 	}
 
 })
